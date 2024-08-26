@@ -85,6 +85,7 @@ publisher {
     setDisplayName("${project.version}")
     setGameVersions("1.18.2")
     setLoaders("forge")
+    setCurseEnvironment("client")
     setArtifact(remapJar)
     addAdditionalFile(sourcesJar)
     curseDepends {
