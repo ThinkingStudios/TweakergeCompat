@@ -1,5 +1,6 @@
 plugins {
     id 'dev.architectury.loom' version '1.6-SNAPSHOT'
+    id "com.hypherionmc.modutils.modpublisher" version "2.+"
     id 'maven-publish'
 }
 
@@ -28,7 +29,7 @@ dependencies {
     modImplementation("maven.modrinth:mafglib:${project.mafglib_version}")
     modImplementation("maven.modrinth:tweakerge:${project.tweakerge_version}")
 
-    modImplementation("maven.modrinth:timeless-and-classics-zero:la8E97Hu") { transitive = false }
+    modImplementation("maven.modrinth:timeless-and-classics-zero:la8E97Hu")
 }
 
 processResources {
@@ -67,5 +68,29 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+publisher {
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+    }
+
+    setCurseID("${project.curseforge_id}")
+    setModrinthID("${project.modrinth_id}")
+    setVersionType("alpha")
+    setChangelog(file("CHANGELOG.md").getText("UTF-8"))
+    setVersion("${project.version}")
+    setDisplayName("${project.version}")
+    setGameVersions("1.18.2")
+    setLoaders("forge")
+    setArtifact(remapJar)
+    addAdditionalFile(sourcesJar)
+    curseDepends {
+        required("tweakerge")
+    }
+    modrinthDepends {
+        required("tweakerge")
     }
 }

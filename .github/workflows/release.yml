@@ -1,6 +1,13 @@
-name: Build
+name: Publish Release
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
 
 jobs:
   Build:
@@ -21,12 +28,11 @@ jobs:
             ~/.gradle/wrapper
             .gradle
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'build.gradle') }}
-      - name: Build with Gradle
-        run: |
+      - uses: gradle/actions/wrapper-validation@v3
+      - run: |
           chmod +x gradlew
-          ./gradlew build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Artifacts-forge
-          path: ${{ github.workspace }}/build/libs
+          ./gradlew build publishMod --stacktrace -Porg.gradle.parallel.threads=4
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}

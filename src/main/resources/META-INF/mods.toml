@@ -27,3 +27,10 @@ mandatory = true
 versionRange = "[1.18,1.18.2]"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.tweakerge_compat]]
+modId = "tweakerge"
+mandatory = true
+versionRange = "[1.18,1.18.2]"
+ordering = "NONE"
+side = "BOTH"
