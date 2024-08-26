@@ -1,17 +1,18 @@
 modLoader = "javafml"
 loaderVersion = "[40,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "GPLv3"
 
 [[mods]]
 modId = "tweakerge_compat"
 version = "${version}"
 displayName = "TweakergeCompat"
-authors = "Me!"
+displayURL = "https://github.com/ThinkingStudios/TweakergeCompat"
+authors = "TexTrue, ThinkingStudio"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Fix the conflict between Tweakerge and other mods.
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.tweakerge_compat]]
 modId = "forge"
@@ -23,6 +24,6 @@ side = "BOTH"
 [[dependencies.tweakerge_compat]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.2,)"
+versionRange = "[1.18,1.18.2]"
 ordering = "NONE"
 side = "BOTH"
